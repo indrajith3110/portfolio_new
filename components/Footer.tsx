@@ -14,7 +14,29 @@ import {
         <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-sm">
   
           {/* Contact Section */}
-    
+          <div>
+            <h3 className="text-emerald-500 font-semibold text-lg mb-4">Contact</h3>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <FaEnvelope />
+                <a href="mailto:indrajithsomaiah2310@gmail.com" className="hover:text-emerald-400 transition">
+                  indrajithsomaiah2310@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaPhone />
+                <a href="tel:9740027186" className="hover:text-emerald-400 transition">
+                  9740027186
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <FaMapMarkerAlt />
+                <a href="https://www.google.com/maps/place/Tumakuru,+Karnataka,+India" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-400 transition">
+                  Tumakuru, India
+                </a>
+              </div>
+            </div>
+          </div>
   
           {/* Social Section */}
           <div>
