@@ -3,7 +3,7 @@ import '../styles/global.css'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'S Teja | Portfolio',
+  title: 'Indrajith | Portfolio',
   description: 'Portfolio built with Next.js',
 }
 
