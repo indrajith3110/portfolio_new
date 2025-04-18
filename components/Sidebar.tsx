@@ -14,7 +14,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="bg-[#2b2b2b] fixed top-6 left-6 h-[92vh] w-72 rounded-2xl p-6 text-center shadow-lg overflow-y-auto z-10">
+      <div className="bg-[#2b2b2b] fixed top-6 left-6 bottom-6 w-92 rounded-2xl p-6 text-center shadow-lg overflow-y-auto z-10">
         <div className="flex flex-col items-center">
           {/* Avatar */}
           <div
@@ -29,8 +29,9 @@ export default function Sidebar() {
           </div>
 
           {/* Name + Role */}
-          <h2 className="text-xl font-semibold text-emerald-500">Indrajith Somaiah R M</h2>
-
+          <h2 className="text-xl font-semibold text-emerald-500">
+            Indrajith Somaiah R M
+          </h2>
           <p className="text-gray-400 text-sm">Fullstack AI Web Developer</p>
 
           {/* Contact Info */}
@@ -49,7 +50,7 @@ export default function Sidebar() {
             </a>
 
             <a
-              href="tel:8639890645"
+              href="tel:9740027186"
               className="bg-[#1e1e1e] rounded-xl p-2 w-60 text-center shadow-md hover:bg-[#333] transition"
             >
               <h4 className="text-emerald-400 font-bold text-sm flex items-center justify-center gap-1">
@@ -78,7 +79,6 @@ export default function Sidebar() {
               target="_blank"
               rel="noopener noreferrer"
               className="bg-emerald-500 p-2 rounded-full hover:bg-emerald-600 transition"
-
             >
               <FaLinkedin className="text-[#1e1e1e] text-base" />
             </a>
@@ -87,7 +87,6 @@ export default function Sidebar() {
               target="_blank"
               rel="noopener noreferrer"
               className="bg-emerald-500 p-2 rounded-full hover:bg-emerald-600 transition"
-
             >
               <FaGithub className="text-[#1e1e1e] text-base" />
             </a>
@@ -96,8 +95,6 @@ export default function Sidebar() {
               target="_blank"
               rel="noopener noreferrer"
               className="bg-emerald-500 p-2 rounded-full hover:bg-emerald-600 transition"
-
-
             >
               <FaInstagram className="text-[#1e1e1e] text-base" />
             </a>
@@ -106,7 +103,6 @@ export default function Sidebar() {
               target="_blank"
               rel="noopener noreferrer"
               className="bg-emerald-500 p-2 rounded-full hover:bg-emerald-600 transition"
-
             >
               <FaTwitter className="text-[#1e1e1e] text-base" />
             </a>
