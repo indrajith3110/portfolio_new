@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 
 import { useEffect, useState, JSX } from "react";
 import Navbar from "@/components/Navbar";
@@ -15,23 +15,26 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [activeSection, setActiveSection] = useState("About");
 
-  // Initial setup on mount
+  // Initial theme setup
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
 
     setDarkMode(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
   }, []);
 
-  // Toggle function
-  const toggleTheme = () => {
-    const newDark = !darkMode;
-    setDarkMode(newDark);
-    document.documentElement.classList.toggle("dark", newDark);
-    localStorage.setItem("theme", newDark ? "dark" : "light");
-  };
+  // Sync document class with darkMode
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
+
+  const toggleTheme = () => setDarkMode((prev) => !prev);
 
   const animatedBox = (Component: JSX.Element, icon: JSX.Element, title: string) => (
     <div className="rounded-2xl shadow-lg p-6 bg-white dark:bg-[#1f1f1f] transition-all duration-500 transform hover:scale-[1.01] w-full max-w-4xl">
@@ -66,7 +69,7 @@ export default function Home() {
             {renderSection()}
           </section>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     </main>
   );
