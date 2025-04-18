@@ -1,103 +1,71 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useState, JSX } from "react";
+import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
+import About from "@/components/About";
+import Resume from "@/components/Resume";
+import { Portfolio } from "@/components/Portfolio";
+import Blog from "@/components/Blog";
+import Contact from "@/components/Contact";
+import { Briefcase, Layers, BookOpen, Mail } from "lucide-react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [darkMode, setDarkMode] = useState(false);
+  const [activeSection, setActiveSection] = useState("About");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  // Initial setup on mount
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
+
+    setDarkMode(isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+  }, []);
+
+  // Toggle function
+  const toggleTheme = () => {
+    const newDark = !darkMode;
+    setDarkMode(newDark);
+    document.documentElement.classList.toggle("dark", newDark);
+    localStorage.setItem("theme", newDark ? "dark" : "light");
+  };
+
+  const animatedBox = (Component: JSX.Element, icon: JSX.Element, title: string) => (
+    <div className="rounded-2xl shadow-lg p-6 bg-white dark:bg-[#1f1f1f] transition-all duration-500 transform hover:scale-[1.01] w-full max-w-4xl">
+      <div className="flex items-center gap-3 mb-4 text-2xl font-semibold">
+        {icon}
+        <span>{title}</span>
+      </div>
+      {Component}
     </div>
+  );
+
+  const renderSection = () => {
+    switch (activeSection) {
+      case "About": return animatedBox(<About />, <Briefcase />, "About");
+      case "Resume": return animatedBox(<Resume />, <Briefcase />, "Resume");
+      case "Portfolio": return animatedBox(<Portfolio />, <Layers />, "Portfolio");
+      case "Blog": return animatedBox(<Blog />, <BookOpen />, "Blog");
+      case "Contact": return animatedBox(<Contact />, <Mail />, "Contact");
+      default: return animatedBox(<About />, <Briefcase />, "About");
+    }
+  };
+
+  return (
+    <main>
+      <div className="bg-white text-black dark:bg-[#121212] dark:text-white min-h-screen transition-colors duration-300">
+        <Navbar toggleTheme={toggleTheme} darkMode={darkMode} setActiveSection={setActiveSection} />
+        <div className="flex px-6 py-8 gap-8">
+          <div className="w-72 shrink-0">
+            <Sidebar />
+          </div>
+          <section className="flex-1 flex justify-center items-start">
+            {renderSection()}
+          </section>
+        </div>
+      </div>
+    </main>
   );
 }
